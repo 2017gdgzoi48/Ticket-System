@@ -1,0 +1,87 @@
+-- --------------------------------------------------------
+-- 主机:                           127.0.0.1
+-- 服务器版本:                        5.7.34 - MySQL Community Server (GPL)
+-- 服务器OS:                        Win64
+-- HeidiSQL 版本:                  10.2.0.5599
+-- --------------------------------------------------------
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+
+-- Dumping database structure for ticketsys3
+CREATE DATABASE IF NOT EXISTS `ticketsys3` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `ticketsys3`;
+
+-- Dumping structure for table ticketsys3.activity
+CREATE TABLE IF NOT EXISTS `activity` (
+  `aid` int(8) NOT NULL AUTO_INCREMENT,
+  `open_time` datetime NOT NULL,
+  `close_time` datetime NOT NULL,
+  `activity_name` varchar(25) NOT NULL DEFAULT '',
+  `poster_img` text NOT NULL,
+  `description` text NOT NULL,
+  `laucher` tinytext NOT NULL,
+  `limit_num` tinyint(1) NOT NULL DEFAULT '2',
+  `seat_map` text NOT NULL,
+  `background` text NOT NULL,
+  `areaid_list` text NOT NULL,
+  `mode` int(11) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`aid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table ticketsys3.area
+CREATE TABLE IF NOT EXISTS `area` (
+  `areaid` int(8) NOT NULL AUTO_INCREMENT,
+  `price` int(3) NOT NULL DEFAULT '0',
+  `area_name` varchar(10) NOT NULL DEFAULT '',
+  `color` char(6) NOT NULL DEFAULT 'FFFFFF',
+  PRIMARY KEY (`areaid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table ticketsys3.ticket
+CREATE TABLE IF NOT EXISTS `ticket` (
+  `tid` int(8) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `payer` char(9) NOT NULL DEFAULT '',
+  `payer_id` int(11) NOT NULL,
+  `areaid` int(8) NOT NULL,
+  `content` varchar(255) DEFAULT '',
+  `aid` int(8) NOT NULL,
+  `time` datetime NOT NULL,
+  `token` char(4) DEFAULT '',
+  `used` char(0) DEFAULT NULL,
+  PRIMARY KEY (`tid`),
+  UNIQUE KEY `content` (`content`),
+  UNIQUE KEY `Index 6` (`token`),
+  KEY `FK_ticket_activity` (`aid`),
+  KEY `FK_ticket_user` (`payer`),
+  KEY `Index 5` (`areaid`),
+  CONSTRAINT `FK_ticket_activity` FOREIGN KEY (`aid`) REFERENCES `activity` (`aid`) ON DELETE CASCADE,
+  CONSTRAINT `FK_ticket_area` FOREIGN KEY (`areaid`) REFERENCES `area` (`areaid`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table ticketsys3.user
+CREATE TABLE IF NOT EXISTS `user` (
+  `uid` int(11) NOT NULL AUTO_INCREMENT,
+  `openid` varchar(28) NOT NULL DEFAULT '',
+  `cardid` char(8) NOT NULL DEFAULT '',
+  `real_name` varchar(4) NOT NULL DEFAULT '',
+  `school_type` char(2) NOT NULL DEFAULT '',
+  PRIMARY KEY (`uid`),
+  UNIQUE KEY `Index 2` (`openid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Data exporting was unselected.
+
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

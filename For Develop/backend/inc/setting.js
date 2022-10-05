@@ -1,0 +1,13 @@
+module.exports={
+	mysqlHost:'localhost',
+	mysqlUser:'root',
+	mysqlPassword:'......',
+	tcpPort:8124,
+	adminID:'7da5860049be3c5333a562878e70',
+	httpPort:8080,
+	wsPort:1234,
+	wxToken:".....",
+	wxKey:"....",
+	baseURL:"localhost:8080",
+	introURL:"....."
+}

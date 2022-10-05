@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>重新买票</title>
+	<style>
+		.bottom{
+			position: absolute;
+			bottom: 5vh;
+			font-size: larger;
+			display: flex;
+			width: 100vw;
+		}
+		.input-info{
+			/*transform: scale(3);*/
+			font-size: 50px;
+			flex: 1;
+			/*width: 50%;*/
+			transform-origin: 0 100%;
+		}
+		.token{
+			flex: 1;
+		}
+		button{
+			font-size: 40px;
+			padding: 0 20px;
+		}
+		ul{
+			font-size: 60px;
+			font-weight: bolder;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<div class="body" id="app">
+		<div class="seat-map">
+			<m-seat-map :activity="activity" :seat-map="seatMap" :hide-nav-bar="true" @change-status="changeStatus"></m-seat-map>
+		</div>
+		<div class="bottom">
+			<div class="input-info">
+				<input v-model.number="cardid" label="学号" placeholder="八位学号" type="number"/>
+				<br>
+				<input v-model="schoolType" label="所属" placeholder="A/B"/>
+				<br>
+				<button @click="buy" type="simple">&nbsp;买&nbsp;</button>
+			</div>
+			<div class="token">
+				<ul>
+					<li v-for="tokenItem in token">{{tokenItem}}</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<script src="../js/rebuy.js" type="module"></script>
+</body>
+</html>

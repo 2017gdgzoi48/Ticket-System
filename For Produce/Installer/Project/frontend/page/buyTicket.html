@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>买票</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
+</head>
+<body>
+	<div id="app">
+<!-- 		<m-show-area v-if="current==null" :list="activity.area" @choose-area="idx=>current=activity.area[idx]" :aid="activity.aid"></m-show-area> -->
+		<m-seat-map :activity="activity" @change-status="changeStatus" :seat-map="seatMap"></m-seat-map>
+		<m-buy-tool :choose-ticket="chooseTicket" :left-num="limit-alreadyBuy" @buy="buy"></m-buy-tool>
+	</div>
+	<script type="module" src="../js/buyTicket.js"></script>
+</body>
+</html>

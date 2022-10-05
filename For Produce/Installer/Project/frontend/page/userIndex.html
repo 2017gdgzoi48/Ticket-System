@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maxmum-scale=1.0,user-scalable=no" />
+	<title>用户首页</title>
+	<style>
+		body{
+			margin: 0;
+		}
+		#page{
+			min-height: calc(100vh - 50px);
+			background-color: #f7f8fa;
+		}
+		.footer{
+			bottom: -1px !important;
+			z-index: 10 !important;
+		}
+		.announce-content{
+			width: 80%;
+			margin: 0 auto;
+			font-size: large;
+			white-space: pre-wrap;
+			word-break: break-all;
+			max-height: 60vh;
+			overflow-y: scroll;
+		}
+		.no-read-more{
+			margin-left: 20px;
+			margin-top: 20px;
+		}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<div id="page">
+			<m-activity-index v-if="pageIdx==0" ></m-activity-index>
+			<m-ticket-index v-if="pageIdx==1" ></m-ticket-index>
+			<m-user-info v-if="pageIdx==2" ></m-user-info>
+			<m-intro v-if="pageIdx==3"></m-intro>
+		</div>
+		<user-footer @change="changePage" v-model="pageIdx" class="footer"></user-footer>
+		<van-dialog v-model:show="showAnnounce" title="通知" @close="closeDialog">
+			<div class="announce-content">
+				{{announce}}
+			</div>
+			<div class="no-read-more">
+				<van-checkbox v-model="noReadMore">下次不再阅读该通知</van-checkbox>
+			</div>
+		</van-dialog>
+	</div>
+	<script type="module" src="../js/userIndex.js"></script>
+</body>
+</html>

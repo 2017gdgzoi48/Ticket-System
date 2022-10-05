@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>管理员页面</title>
+	<style>
+		#app{
+			display: grid;
+			grid-template-columns: 10vw 90vw;
+			grid-template-rows: 50px calc(100vh - 50px);
+		}
+		.header{
+			 grid-column-start: 1;
+			 grid-column-end: 3;
+			 grid-row-start: 1;
+			 grid-row-end: 2;
+			 line-height: 50px;
+			 background: #03a9f4;
+			 color: white;
+			 font-size: 30px;
+			 padding-left: 50px;
+			 font-family: fangsong;
+			 font-weight: bolder;
+			 box-shadow: 0px 4px 7px grey;
+			 z-index: 3;
+		}
+		.aside{
+			grid-column-start: 1;
+			grid-column-end: 2;
+			grid-row-start: 2;
+			grid-row-end: 3;
+		}
+		.content{
+			grid-column-start: 2;
+			grid-column-end: 3;
+			grid-row-start: 2;
+			grid-row-end: 3;
+			overflow-x: hidden;
+		}
+		.welcome{
+			margin-top: 30px;
+			margin-left: 30px;
+			font-size: larger;
+			font-weight: bolder;
+		}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<div class="header">
+			购票系统管理页面 v2.0
+		</div>
+		<div class="aside">
+			<a-menu @click="changePage">
+				<a-menu-item key="1">用户管理</a-menu-item>
+				<a-menu-item key="2">订单管理</a-menu-item>
+				<a-menu-item key="3">活动管理</a-menu-item>
+				<a-menu-item key="4">检票验票</a-menu-item>
+				<a-menu-item key="5">更改密码</a-menu-item>
+				<a-menu-item key="7">座位预览</a-menu-item>
+				<a-menu-item key="8">编辑设置</a-menu-item>
+			</a-menu>
+		</div>
+		<div class="content">
+			<div class="welcome" v-if="current==0">
+				欢迎使用本管理系统！<br>
+				点击侧边栏以开始。
+			</div>
+			<user-admin v-if="current==1"></user-admin>
+			<ticket-admin v-if="current==2"></ticket-admin>
+			<activity-admin v-if="current==3" @create-activity="current=6"></activity-admin>
+			<ticket-validate v-if="current==4"></ticket-validate>
+			<change-password v-if="current==5"></change-password>
+			<create-activity v-if="current==6"></create-activity>
+			<watch-activity v-if="current==7"></watch-activity>
+			<edit-config v-if="current==8"></edit-config>
+		</div>
+	</div>
+	<script type="module" src="../js/adminPage.js"></script>
+</body>
+</html>

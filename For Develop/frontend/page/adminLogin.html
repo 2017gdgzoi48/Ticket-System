@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>管理员登录</title>
+	<style>
+		body{
+			overflow: hidden;
+		}
+		.login-form{
+			width: 300px;
+			margin: 30px auto;
+			text-align: center;
+		}
+		.login-form button{
+			margin-top: 20px;
+		}
+		.title{
+			font-size: xx-large;
+			font-weight: bolder;
+			text-align: center;
+			margin: 30px auto;
+			margin-top: 30vh;
+			width: fit-content;
+		}
+		.loading{
+			width: 30px;
+			height: 30px;
+		}
+		.login-info{
+			color: grey;
+			width: 60vw;
+			margin: 20px auto;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<div class="title">
+			管理员登录
+			<a-divider style="padding: 10px 20vw;"></a-divider>
+		</div>
+		<div class="login-form">
+			<a-input-password v-model:value="password"></a-input-password>
+			<a-button type="primary" @click="submit">登录</a-button>
+		</div>
+		<div class="login-info">
+			<!-- 如果您不是管理员，而是通过您的技术手段到达这个页面的话，我们诚挚邀请您加入我们的团队。<br>
+			QQ: 1378278367 -->
+			欢迎您，管理员
+		</div>
+	</div>
+	<script type="module" src="../js/adminLogin.js"></script>
+</body>
+</html>
